@@ -9,7 +9,7 @@ import Frame from './views/Frame';
 import LoginContainer from './views/Login';
 import Welcome from './views/Welcome';
 import auth from './reducers/auth';
-
+import {login} from './actions/auth';
 let store = createStore(auth, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 class Base extends React.Component{
   constructor(props){
@@ -37,6 +37,7 @@ class Base extends React.Component{
     let token = Cookies.get("token");
     if(!token){
       this.setState({showWelcome: false})
+      this.props.setlogin(false);
       return;
     }
     let data = {token: token};
@@ -47,9 +48,11 @@ class Base extends React.Component{
       'Content-Type': 'application/json'})
       }).then(response => response.json()).then( res => {
       if(res.result === "true"){
-        this.setState({showWelcome: false, showLogin: false})
+        this.setState({showWelcome: false, showLogin: false});
+        this.props.setlogin(true);        
       } else {
-        this.setState({showWelcome: false, showLogin: true})        
+        this.setState({showWelcome: false, showLogin: true});
+        this.props.setlogin(false);        
       }
     })
   }
@@ -64,8 +67,14 @@ const mapStateToProps = (state, ownProps) => {
     login: state.login
   }
 }
-
-const BaseContainer = connect(mapStateToProps)(Base);
+const mapDispatchToProps = dispatch => {
+  return {
+      setlogin: (flag) => {
+          dispatch(login(flag))
+      }
+  }
+}
+const BaseContainer = connect(mapStateToProps, mapDispatchToProps)(Base);
 
 document.getElementById('root').style.height = "100%";
 ReactDOM.render(
