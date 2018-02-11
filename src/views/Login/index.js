@@ -1,8 +1,23 @@
 import React from "react";
+import {connect} from "react-redux";
 import {Row, Col, Input, Button} from "antd";
 import Cookies from 'js-cookie';
+import {login} from '../../actions/auth';
+const mapStateToProps = (state, ownProps) => {
+    return {
+      login: state.login
+    }
+  }
 
-export default class Login extends React.Component{
+const mapDispatchToProps = dispatch => {
+    return {
+        onResultOK: () => {
+            dispatch(login(true))
+        }
+    }
+}
+
+class Login extends React.Component{
     state={
         username: "",
         pwd: ""
@@ -25,7 +40,8 @@ export default class Login extends React.Component{
                 var inFifteenMinutes = new Date(new Date().getTime() + 15 * 60 * 1000);
                 Cookies.set('token', res.token, {
                     expires: inFifteenMinutes
-                });            
+                });    
+                this.props.onResultOK();
             }
         })        
     }
@@ -41,3 +57,6 @@ export default class Login extends React.Component{
         )
     }
 }
+
+const LoginContainer = connect(mapStateToProps, mapDispatchToProps)(Login);
+export default LoginContainer;
