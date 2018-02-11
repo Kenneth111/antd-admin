@@ -1,7 +1,7 @@
-import NavMenu from '../NavMenu';
+import NavMenuContainer from '../NavMenu';
 import React from 'react'
 import {Route,BrowserRouter, Switch} from 'react-router-dom';
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu } from 'antd';
 const { Header, Content, Sider } = Layout;
 
 export default class Frame extends React.Component{
@@ -20,14 +20,9 @@ export default class Frame extends React.Component{
                 </Header>
                 <Layout>
                     <Sider width={200} style={{ background: '#fff' }}>
-                        <NavMenu/>
+                        <NavMenuContainer/>
                     </Sider>
-                    <Layout style={{ padding: '0 24px 24px' }}>
-                        <Breadcrumb style={{ margin: '16px 0' }}>
-                        <Breadcrumb.Item>Home</Breadcrumb.Item>
-                        <Breadcrumb.Item>List</Breadcrumb.Item>
-                        <Breadcrumb.Item>App</Breadcrumb.Item>
-                        </Breadcrumb>
+                    <Layout style={{ padding: '24px 24px 24px' }}>
                         <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
                             <BrowserRouter>
                                 <Switch>
