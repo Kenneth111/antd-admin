@@ -14,17 +14,10 @@ let store = createStore(auth, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__RE
 class Base extends React.Component{
   constructor(props){
     super(props)   
-    if(props.login){
-      this.state = {
-        showLogin: false,
-        showWelcome: false
-      }
-    } else {
-      this.state = {
-        showLogin: true,
-        showWelcome: true
-      } 
-    }
+    this.state = {
+      showLogin: true,
+      showWelcome: true
+    } 
   }
   componentWillReceiveProps(nextProps){
     if(nextProps.login){
