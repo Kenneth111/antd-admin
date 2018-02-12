@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {Row, Col, Input, Button} from "antd";
+import {Row, Col, Input, Button, Alert} from "antd";
 import Cookies from 'js-cookie';
 import {login} from '../../actions/auth';
 const mapStateToProps = (state, ownProps) => {
@@ -20,7 +20,8 @@ const mapDispatchToProps = dispatch => {
 class Login extends React.Component{
     state={
         username: "",
-        pwd: ""
+        pwd: "",
+        error: false
     }
     usernameChange(e){
         this.setState({username: e.target.value})
@@ -42,6 +43,8 @@ class Login extends React.Component{
                     expires: inFifteenMinutes
                 });    
                 this.props.onResultOK();
+            } else {
+                this.setState({error: true});
             }
         })        
     }
@@ -51,6 +54,7 @@ class Login extends React.Component{
                 <Col md={8} offset={8}>
                     Username: <Input type="text" value={this.state.username} onChange={this.usernameChange.bind(this)}/>
                     Password: <Input type="password" value={this.state.pwd} onChange={this.passwordChange.bind(this)}/>
+                    {this.state.error? <Alert message="用户名或密码有误" type="error" />: null}
                     <Button type="primary" onClick={this.submit.bind(this)}>Login</Button>
                 </Col>
             </Row>

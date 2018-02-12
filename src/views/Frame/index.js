@@ -1,4 +1,5 @@
 import NavMenuContainer from '../NavMenu';
+import SysInfo from "../SysInfo";
 import React from 'react'
 import {Route,BrowserRouter, Switch} from 'react-router-dom';
 import { Layout, Menu } from 'antd';
@@ -26,10 +27,9 @@ export default class Frame extends React.Component{
                         <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
                             <BrowserRouter>
                                 <Switch>
-                                    <Route exact path="/"></Route>
+                                    <Route exact path="/" component={SysInfo}></Route>
                                 </Switch>
                             </BrowserRouter>
-                        Content
                         </Content>
                     </Layout>
                 </Layout>
