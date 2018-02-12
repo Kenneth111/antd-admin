@@ -18,6 +18,7 @@
   },
   "login": {
     "username": "admin",
-    "pwd": "password"
+    "pwd": "password",
+    "error": false
   }
 }
