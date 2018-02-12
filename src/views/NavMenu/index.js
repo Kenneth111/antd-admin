@@ -1,30 +1,16 @@
-import {login} from '../../actions/auth';
 import React from 'react';
-import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import { Menu, Icon } from 'antd';
 import Cookies from 'js-cookie';
 
 const SubMenu = Menu.SubMenu;
-const mapStateToProps = (state, ownProps) => {
-    return {
-      login: state.login
-    }
-  }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        logout: () => {
-            dispatch(login(false))
-        }
-    }
-}
-class NavMenu extends React.Component{
+export default class NavMenu extends React.Component{
     menuItemClicked(message){
         switch(message.key){
             case "logout":
                 Cookies.remove("token");
-                this.props.logout();
+                this.props.setlogin(false);
                 break;
             default:
                 break;
@@ -65,6 +51,3 @@ class NavMenu extends React.Component{
         )
     }
 }
-
-const NavMenuContainer = connect(mapStateToProps, mapDispatchToProps)(NavMenu);
-export default NavMenuContainer;

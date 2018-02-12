@@ -6,7 +6,7 @@ import {Provider, connect} from 'react-redux';
 import {createStore} from 'redux';
 import Cookies from 'js-cookie';
 import Frame from './views/Frame';
-import LoginContainer from './views/Login';
+import Login from './views/Login';
 import Welcome from './views/Welcome';
 import auth from './reducers/auth';
 import {login} from './actions/auth';
@@ -51,7 +51,7 @@ class Base extends React.Component{
   }
   render(){
     return (<div style={{height: "100%"}}>
-      {this.state.showWelcome? <Welcome/>: this.state.showLogin? <LoginContainer/>: <Frame/>}
+      {this.state.showWelcome? <Welcome/>: this.state.showLogin? <Login {...this.props}/>: <Frame {...this.props}/>}
     </div>)
   }
 }

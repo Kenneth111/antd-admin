@@ -1,23 +1,8 @@
 import React from "react";
-import {connect} from "react-redux";
 import {Row, Col, Input, Button, Alert} from "antd";
 import Cookies from 'js-cookie';
-import {login} from '../../actions/auth';
-const mapStateToProps = (state, ownProps) => {
-    return {
-      login: state.login
-    }
-  }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onResultOK: () => {
-            dispatch(login(true))
-        }
-    }
-}
-
-class Login extends React.Component{
+export default class Login extends React.Component{
     state={
         username: "",
         pwd: "",
@@ -42,7 +27,7 @@ class Login extends React.Component{
                 Cookies.set('token', res.token, {
                     expires: inFifteenMinutes
                 });    
-                this.props.onResultOK();
+                this.props.setlogin(true);
             } else {
                 this.setState({error: true});
             }
@@ -61,6 +46,3 @@ class Login extends React.Component{
         )
     }
 }
-
-const LoginContainer = connect(mapStateToProps, mapDispatchToProps)(Login);
-export default LoginContainer;

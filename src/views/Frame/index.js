@@ -1,4 +1,4 @@
-import NavMenuContainer from '../NavMenu';
+import NavMenu from '../NavMenu';
 import SysInfo from "../SysInfo";
 import Network from "../Network";
 import React from 'react'
@@ -23,7 +23,7 @@ export default class Frame extends React.Component{
                     </Header>
                     <Layout>
                         <Sider width={200} style={{ background: '#fff' }}>
-                            <NavMenuContainer/>
+                            <NavMenu {...this.props}/>
                         </Sider>
                         <Layout style={{ padding: '24px 24px 24px' }}>
                             <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
